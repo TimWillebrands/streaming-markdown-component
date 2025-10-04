@@ -12,14 +12,17 @@ permissions:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: 'latest'
 
       - name: Install
         run: bun install --no-progress
@@ -27,16 +30,12 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Setup Node for npm publish
-        uses: actions/setup-node@v4
+      - name: Publish
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Publish (npm)
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+      - run: npm publish --provenance --ignore-scripts
         if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish --access public
-
-
