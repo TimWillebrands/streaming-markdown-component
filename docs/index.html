@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Streaming Markdown Component Demo</title>
+  <title>Streaming Markdown Demo</title>
   <style>
     :root { color-scheme: light dark; }
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial; margin: 2rem; line-height: 1.5; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol; margin: 2rem; line-height: 1.5; }
     main { max-width: 800px; margin: 0 auto; }
     .controls { display: flex; gap: 0.5rem; margin: 1rem 0; align-items: center; }
     button { padding: 0.5rem 0.75rem; font: inherit; cursor: pointer; }
@@ -18,8 +18,8 @@
 </head>
 <body>
   <main>
-    <h1>Streaming Markdown Component Demo</h1>
-    <p>This page is hosted via GitHub Pages. It loads the built component and streams some text.</p>
+    <h1>Streaming Markdown Demo</h1>
+    <p>This demo streams predefined Markdown chunks into the custom <code>&lt;streaming-md&gt;</code> component.</p>
     <div class="controls">
       <button id="start">Start stream</button>
       <button id="reset">Reset</button>
@@ -30,14 +30,38 @@
   <script type="module">
     import './dist/index.js';
 
-    const md = `# Hello Pages!\n\n` +
-               `This demo is served from GitHub Pages.\n\n` +
-               `- Uses <streaming-md>\n` +
-               `- Powered by streaming-markdown\n\n` +
-               `\` +
-               `\`\`\`js\nconsole.log("Pages demo")\n\`\`\`\n`;
+    const md = `
+   *[DIAL-UP MODEM SOUNDS INTENSIFY]*
+
+
+# \U0001f389 PROOMPTING: The Future Is Now, Thanks To Science!
+
+**SOI SOI SOI SOI SOI SOI SOI**
+
+Greetings, fellow carbon-based life forms! Microsoft Sam here, and boy oh boy, do I have something SPECTACULAR to show you today! Remember when I used to read your emails back in Windows XP? Well, those days are OVER because now I'm here to tell you about PROOMPTING - the most REVOLUTIONARY chat application since... well... since ME!
+
+## What The Heck Is This Thing?
+
+Picture this: It's 2001. You've got your Windows XP machine humming along, Limewire is downloading your "totally legal" MP3s, and your 56k modem is screaming into the void. But WAIT! What if I told you that you could chat with an ARTIFICIAL INTELLIGENCE right from your desktop? That's right, folks - we've taken the best parts of Windows XP and SUPERCHARGED them with \u2728AI\u2728!
+
+\`\`\`
+\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510
+\u2502 \U0001f5a5\ufe0f AUTHENTIC XP DESKTOP EXPERIENCE  \u2502
+\u2502 \U0001f916 REAL AI THAT SOMEWHAT WORKS      \u2502
+\u2502 \U0001f4ac CHAT ROOMS (LIKE MSN BUT BETTER) \u2502
+\u2502 \u26a1 FASTER THAN DIALUP (THANKFULLY)  \u2502
+\u2502 \U0001f504 REAL-TIME MESSAGE STREAMING      \u2502
+\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518
+\`\`\`
+
+Link (wow): [Windows XP](https://www.microsoft.com/en-us/windowsxp/)
+
+
+*[WINDOWS XP SHUTDOWN SOUND]*
+ `
 
     function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
     async function start() {
       const el = document.getElementById('md');
       el.reset();
@@ -48,11 +72,14 @@
       }
       el.finish();
     }
+
     document.getElementById('start').addEventListener('click', start);
     document.getElementById('reset').addEventListener('click', () => document.getElementById('md').reset());
+
+    // Auto-start
     start();
   </script>
 </body>
-  </html>
+</html>
 
 
