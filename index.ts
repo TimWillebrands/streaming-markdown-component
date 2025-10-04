@@ -35,6 +35,8 @@ class StreamingMarkdownElement extends HTMLElement {
     this.parser = smd.parser(smd.default_renderer(this.container));
     // Capture text nodes appended by htmx SSE/WebSocket handlers
     this.observer.observe(this, { childList: true });
+    // Consume any initial child content present at connect time
+    this.consumeInitialChildren();
   }
 
   disconnectedCallback(): void {
@@ -78,6 +80,21 @@ class StreamingMarkdownElement extends HTMLElement {
       }
     }
   };
+
+  private consumeInitialChildren(): void {
+    const snapshot = Array.from(this.childNodes);
+    for (const node of snapshot) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const text = (node as Text).data;
+        if (text) this.appendChunk(text);
+        node.parentNode?.removeChild(node);
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        const text = (node as Element).textContent || "";
+        if (text) this.appendChunk(text);
+        node.parentNode?.removeChild(node);
+      }
+    }
+  }
 
   private autoScrollIfNearBottom(): void {
     // Only scroll if the user is near the bottom to avoid disrupting reading
