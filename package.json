@@ -1,0 +1,39 @@
+{
+  "name": "streaming-markdown-component",
+  "version": "0.1.0",
+  "description": "<streaming-md> custom element that streams markdown using streaming-markdown",
+  "keywords": ["markdown", "streaming", "web-components", "custom-element", "htmx", "sse", "websocket"],
+  "license": "MIT",
+  "author": "Tim <you@example.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourname/streaming-markdown-component.git"
+  },
+  "homepage": "https://github.com/yourname/streaming-markdown-component#readme",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "bun build ./index.ts --outdir ./dist --target=browser --format=esm",
+    "prepublishOnly": "bun run build",
+    "release": "npm version patch && git push --follow-tags"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "streaming-markdown": "^0.2.15"
+  }
+}
